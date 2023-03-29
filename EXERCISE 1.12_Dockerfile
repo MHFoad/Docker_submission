@@ -1,0 +1,22 @@
+# Base image
+FROM node:16
+
+# Set working directory
+WORKDIR /app
+
+# Copy source code
+COPY . .
+
+# Install dependencies
+RUN npm install
+# Build static files
+
+RUN npm run build
+# Install the serve package globally
+RUN npm install -g serve
+
+# Expose port 5000
+EXPOSE 5000
+
+# Set the default command to serve the project
+CMD ["serve", "-s", "-l", "5000", "build"]
